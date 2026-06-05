@@ -1,0 +1,30 @@
+.env
+.env.*
+!.env.example
+.DS_Store
+.sessions/
+node_modules/
+.next/
+out/
+dist/
+*.pyc
+__pycache__/
+.idea/
+.vscode/
+*.pem
+*.key
+id_rsa*
+dry_run_output/
+
+# build + tooling artifacts
+*.tsbuildinfo
+.playwright-cli/
+
+# Local tooling, assistant config, and working notes
+.claude/
+CLAUDE.md
+SOUL.md
+AGENTS.md
+docs/plans/
+docs/kb-references.md
+harness-audit*.json
