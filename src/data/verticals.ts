@@ -8,7 +8,8 @@
  *
  * Every fact below is transcribed from a primary source and cited in its `sources` entry.
  * Timelines verified against primary sources on 2026-06-05:
- *   - Defense  — CNSA 2.0 (2025/2026/2027/2030/2033) + NSM-10 (2035): NSA CNSA 2.0 FAQ.
+ *   - Defense  — CNSA 2.0 (2025/2026/2027 + the 2027 new-acquisition procurement gate/2030/2033)
+ *                + NSM-10 (2035): NSA CNSA 2.0 FAQ and CNSSP-15.
  *   - Finance  — EU DORA (applies 17 Jan 2025) + EU PQC roadmap (plans 2026, high-risk 2030,
  *                full 2035): EU Coordinated Implementation Roadmap (NIS Cooperation Group).
  *   - Healthcare — HIPAA Security Rule NPRM (issued Dec 2024 / published Jan 2025): proposed,
@@ -201,6 +202,14 @@ export const VERTICALS: Record<Vertical["id"], Vertical> = {
       },
       {
         mandate: "CNSA 2.0",
+        milestone:
+          "New National Security System acquisitions must use CNSA 2.0 (procurement requirement, effective 1 January 2027). This is the first hard contracting gate: new buys that are not CNSA 2.0 capable can be turned away, which is why it pulls vendors and their suppliers forward now.",
+        year: 2027,
+        status: "target",
+        sourceId: "cnsa2-acq",
+      },
+      {
+        mandate: "CNSA 2.0",
         milestone: "Operating systems should support and prefer CNSA 2.0.",
         year: 2027,
         status: "target",
@@ -235,6 +244,12 @@ export const VERTICALS: Record<Vertical["id"], Vertical> = {
         id: "cnsa2",
         title: "Commercial National Security Algorithm Suite 2.0 FAQ",
         body: "NSA (FAQ, Dec 2024). Transition timeline by category: support and prefer CNSA 2.0 from 2025 (signing, browsers/servers), 2026 (networking), 2027 (operating systems), 2030 (niche); exclusive use by 2030 (signing, networking) and 2033 (all other national security systems). Specifies ML-KEM-1024 and ML-DSA-87. Years confirmed against the NSA CNSA 2.0 FAQ on 2026-06-05.",
+        url: "https://www.nsa.gov/Press-Room/Digital-Media-Center/Document-Gallery/igphoto/2003071836/",
+      },
+      {
+        id: "cnsa2-acq",
+        title: "CNSA 2.0 new-acquisition procurement requirement (NSA guidance / CNSSP-15)",
+        body: "NSA and the Committee on National Security Systems. New National Security System acquisitions must use CNSA 2.0 algorithms effective 1 January 2027 — the first date at which non-compliant new buys can be rejected, and the most contract-relevant CNSA 2.0 milestone for defense industrial base vendors. Confirmed against NSA CNSA 2.0 guidance on 2026-06-05; re-confirm CNSSP-15 wording before high-stakes use.",
         url: "https://www.nsa.gov/Press-Room/Digital-Media-Center/Document-Gallery/igphoto/2003071836/",
       },
       {

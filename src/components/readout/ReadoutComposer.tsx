@@ -27,7 +27,9 @@ const COMPANY_MAX = 100;
 
 export default function ReadoutComposer({ initialReadout }: { initialReadout: Readout }) {
   const [verticalId, setVerticalId] = useState<Vertical["id"]>(initialReadout.vertical.id);
-  const [companyName, setCompanyName] = useState("");
+  // Pre-fill a recognizable defense prime so the strongest capability (live, company-tailored
+  // generation) is one obvious click away rather than hidden behind an empty field.
+  const [companyName, setCompanyName] = useState("Lockheed Martin");
   const [readout, setReadout] = useState<Readout>(initialReadout);
   const [source, setSource] = useState<Source>("archetype");
   const [loading, setLoading] = useState(false);
@@ -104,6 +106,15 @@ export default function ReadoutComposer({ initialReadout }: { initialReadout: Re
             className="rounded-lg border border-atrisk/30 bg-atrisk-soft px-4 py-3 text-[13px] leading-6 text-ink-soft"
           >
             {notice}
+          </p>
+        </div>
+      ) : source === "archetype" && !loading ? (
+        <div className="mx-auto max-w-3xl px-5 pt-5 sm:px-8">
+          <p className="rounded-lg border border-accent/25 bg-accent/[0.05] px-4 py-3 text-[13px] leading-6 text-ink-soft">
+            This is the grounded archetype. Hit{" "}
+            <span className="font-medium text-ink">Generate readout</span> to compose a live,{" "}
+            {companyName.trim() ? `${companyName.trim()}-tailored` : "company-tailored"} brief in a
+            few seconds. Every fact stays sourced from the data file; only the narrative is written live.
           </p>
         </div>
       ) : null}

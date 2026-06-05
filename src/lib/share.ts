@@ -15,10 +15,21 @@
  */
 
 import { computeMosca } from "@/lib/mosca";
-import { checkReadoutGrounding } from "@/lib/facts-grounding";
+import { checkReadoutGrounding, checkGrounding } from "@/lib/facts-grounding";
 import { sampleReadout } from "@/lib/sample-readout";
 import type { Readout, ReadoutProse } from "@/lib/readout";
 import { VERTICALS, MOSCA_Z, VERTICAL_IDS, type Vertical } from "@/data/verticals";
+
+/** Company name is free text that renders as the readout headline. Cap its length and
+ * run it through the SAME grounding gate as the prose, so a tampered share link cannot
+ * smuggle a fake date or algorithm name into the headline ("Acme, migrate by 2099"). */
+const COMPANY_MAX = 100;
+function sanitizeCompany(c: unknown): string | null {
+  if (typeof c !== "string") return null;
+  const trimmed = c.trim().slice(0, COMPANY_MAX);
+  if (!trimmed) return null;
+  return checkGrounding(trimmed).grounded ? trimmed : null;
+}
 
 type SharePayload = {
   /** vertical id */
@@ -80,7 +91,7 @@ function parsePayload(fragment: string): SharePayload | null {
     if (typeof o.v !== "string" || !(VERTICAL_IDS as string[]).includes(o.v)) return null;
     if (o.c !== null && typeof o.c !== "string") return null;
     if (!isProse(o.p)) return null;
-    return { v: o.v as Vertical["id"], c: o.c, p: o.p };
+    return { v: o.v as Vertical["id"], c: o.c === null ? null : sanitizeCompany(o.c), p: o.p };
   } catch {
     return null;
   }
